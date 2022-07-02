@@ -19,7 +19,7 @@
 <body onload="onLoad()" id="page" style="display: none;">
 <div class="col-md-6 mx-auto p-3 py-md-5 border-start border-end">
   	<header class="d-flex align-items-center pb-3 mb-5 border-bottom">
-      	<span id="judul" class="fs-4">Ezirs W3B</span>
+      	<span id="title" class="fs-4">Ezirs W3B</span>
   	</header>
 
 	<?php
@@ -29,63 +29,26 @@
 		    include 'page.zirsfil.php';
 		} else {
 			require __DIR__.'/../config.zirsfil.php';
-			$url_halaman = $_GET['page'];
-			$query = "select * from tbhalaman where url_halaman = '$url_halaman'";
-	        $result = $conn->query($query);
-	        $row = mysqli_fetch_array($result);
-	        if ($row) {
+			$url_page = $_GET['page'];
+			$query = "select * from tbpage where url_page = '$url_page'";
+            $result = $conn->query($query);
+            $row = mysqli_fetch_array($result);
+            if ($row) {
 	?>
 
 				<script type="text/javascript">
-					document.getElementById('judul').innerHTML += " || <?= $row['judul_halaman'] ?>";
+					document.getElementById('title').innerHTML += " || <?= $row['page_title'] ?>";
 				</script>
 
 	<?php
 	        	include 'page/' . $row['path'] . '/' . $_GET['page'] . '.zirsfil.php';
 	        } else {
-	        	echo '<div class="text-center"><h1>Halaman Tidak Ditemukan</h1></div>';
+	        	echo '<div class="text-center"><h1>Page not found</h1></div>';
 	        }
 			
 		}
 		
 	?>
-    
-    <div id="iklan">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4007486504785362"
-             crossorigin="anonymous"></script>
-        <ins class="adsbygoogle"
-             style="display:block; text-align:center;"
-             data-ad-layout="in-article"
-             data-ad-format="fluid"
-             data-ad-client="ca-pub-4007486504785362"
-             data-ad-slot="1067740672"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-        
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4007486504785362"
-             crossorigin="anonymous"></script>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-format="fluid"
-             data-ad-layout-key="-fc+5g+70-cl-1m"
-             data-ad-client="ca-pub-4007486504785362"
-             data-ad-slot="7277925804"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-        
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4007486504785362"
-             crossorigin="anonymous"></script>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-format="autorelaxed"
-             data-ad-client="ca-pub-4007486504785362"
-             data-ad-slot="4432270619"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
     
     <footer id="footer" class="pt-5 my-5 text-muted border-top">
     	Created by ezirs &middot; &copy; <?= date('Y') ?>
@@ -101,7 +64,6 @@
     }
     
     if (window.top != window.self) {
-        $('#iklan').hide();
         $('#footer').hide();
     }
 </script>

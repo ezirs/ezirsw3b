@@ -1,6 +1,6 @@
 <?php
 	require __DIR__.'/../../../config.zirsfil.php';
-    $result = $conn->query("select * from tbfiles order by tanggal_pembuatan desc");
+    $result = $conn->query("select * from tbfiles order by created_at desc");
     $num = mysqli_num_rows($result);
 
     function convert($size) {
@@ -21,17 +21,17 @@
 			if ($num) {
 		    	for ($i = 1; $i <= $num; $i++) {
 				$row = mysqli_fetch_array($result);
-				$nm_fil = explode('#', $row['nama_file'])[1];
+				$nm_fil = explode('#', $row['file_name'])[1];
 				$dw = 'download="'. $nm_fil . '"';
 
 		?>
-	  	<a href="?page=dw-fil&fn=<?= base64_encode($row['nama_file']) ?>" <?php if ($row['password'] == "" || $row['password'] == null) { echo $dw; } ?> class="list-group-item list-group-item-action" aria-current="true">
+	  	<a href="?page=dw-fil&fn=<?= base64_encode($row['file_name']) ?>" <?php if ($row['password'] == "" || $row['password'] == null) { echo $dw; } ?> class="list-group-item list-group-item-action" aria-current="true">
 	    	<div class="d-flex w-100 justify-content-between">
-	      		<h5 class="mb-1"><?= explode('#', $row['nama_file'])[1] ?></h5>
+	      		<h5 class="mb-1"><?= explode('#', $row['file_name'])[1] ?></h5>
 	      		<small><?= convert($row['size']) ?></small>
 	    	</div>
     		<small>
-    			<b>ID : </b>[<?= explode('_', explode('#', $row['nama_file'])[0])[1] ?>] 
+    			<b>ID : </b>[<?= explode('_', explode('#', $row['file_name'])[0])[1] ?>] 
     			<b>PW : </b>[<?php if ($row['password'] == "" || $row['password'] == null) { echo 'false'; } else { echo 'true'; } ?>]
     		</small>
 	  	</a>
@@ -39,7 +39,7 @@
 				}
 			} else {
 		?>
-			<div class="text-center"><h1>Tidak ada file yang bisa ditampilkan</h1></div>
+			<div class="text-center"><h1>No files to display</h1></div>
 		<?php
 			}
 		?>

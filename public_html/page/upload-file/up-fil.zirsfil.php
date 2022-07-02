@@ -4,7 +4,7 @@
             <input type="file" name="file" id="fileInput" onchange="detailFIle()" class="form-control" required>
             <button type="button" id="form_reset" class="btn btn-outline-dark p-1" onclick="resetForm()"><i class="bi bi-x-circle"></i></button>
             <button type="button" id="file_detail" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Lainnya</span>
+                <span class="visually-hidden">Other</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
                 <ul class="list-group px-2">

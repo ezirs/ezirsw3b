@@ -12,7 +12,7 @@
     $new_fil_name = explode('.', $file_up_name)[0] . '.zip';
     
     if (file_exists("files/" . $new_fil_name)) {
-        $conn->query("insert into tbfiles (nama_file, password, size, tanggal_pembuatan) values ('$new_fil_name','$password','$size', '$time')");
+        $conn->query("insert into tbfiles (file_name, password, size, created_at) values ('$new_fil_name','$password','$size', '$time')");
     } else {
         $ext = pathinfo($file_up_name, PATHINFO_EXTENSION);
         $zip_name = 'files/' . $new_fil_name;
@@ -24,9 +24,9 @@
             $zip->close();
         }
         $size = filesize($zip_name);
-        $sql = "insert into tbfiles (nama_file, password, size, tanggal_pembuatan) values ('$new_fil_name','$password','$size', '$time')";
+        $sql = "insert into tbfiles (file_name, password, size, created_at) values ('$new_fil_name','$password','$size', '$time')";
         mysqli_query($conn, $sql);
     }
 ?>
 
-<div class="text-center"><h1>Akses Ditolak</h1></div>
+<div class="text-center"><h1>Access denied</h1></div>

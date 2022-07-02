@@ -5,7 +5,7 @@
 		if (isset($_POST['pass_file'])) {
 			$fileName = base64_decode($_GET['fn']);
 			$pass_file = $_POST['pass_file'];
-			$result = $conn->query("select * from tbfiles where nama_file = '$fileName' and password = '$pass_file'");
+			$result = $conn->query("select * from tbfiles where file_name = '$fileName' and password = '$pass_file'");
 			$row = mysqli_fetch_array($result);
 			if ($row) {
 				$file = 'files/' . $fileName;
@@ -14,7 +14,7 @@
 				    $conn->query("insert into tbaccessfile (token, file_name) values ('$uniqId','$file_name')");
 ?>
 					<div class="text-center mb-3">
-						<a href="?page=dw-fil-pw&fn=<?= base64_encode($row['nama_file']) ?>&idf=<?= $uniqId ?>" download="<?= explode('#', $row['nama_file'])[1]; ?>" onclick="javascript:location.reload(true)" class="btn btn-outline-success w-50">Download</a>
+						<a href="?page=dw-fil-pw&fn=<?= base64_encode($row['file_name']) ?>&idf=<?= $uniqId ?>" download="<?= explode('#', $row['file_name'])[1]; ?>" onclick="javascript:location.reload(true)" class="btn btn-outline-success w-50">Download</a>
 					</div>
 <?php
 			    } else {
@@ -35,7 +35,7 @@
 			}
 		} else {
 			$fileName = base64_decode($_GET['fn']);
-			$result = $conn->query("select * from tbfiles where nama_file = '$fileName'");
+			$result = $conn->query("select * from tbfiles where file_name = '$fileName'");
 			$row = mysqli_fetch_array($result);
 			if ($row) {
 				if ($row['password'] == "" || $row['password'] == null || $_GET['uniqid'] == $uniqId) {

@@ -27,9 +27,9 @@
 	          	@$video_embed = $video->microformat->playerMicroformatRenderer->embed->iframeUrl;
 	          	@$isLiveNow = $video->microformat->playerMicroformatRenderer->liveBroadcastDetails->isLiveNow;
 
-	          	$jam = floor($video_duration_in_seconds / 3600);
-	          	$menit = floor(($video_duration_in_seconds / 60) % 60);
-	          	$detik = $video_duration_in_seconds % 60;
+	          	$hour = floor($video_duration_in_seconds / 3600);
+	          	$minute = floor(($video_duration_in_seconds / 60) % 60);
+	          	$second = $video_duration_in_seconds % 60;
 	        }
 		}
 	}
@@ -48,9 +48,9 @@
 <main>
 	<form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
 		<div class="input-group mb-3 input-group-lg">
-		  	<input type="text" class="form-control" placeholder="Masukkan url youtube disini!" value="<?php if (isset($_POST['submit'])) { echo $_POST['video_url']; } ?>" name="video_url">
+		  	<input type="text" class="form-control" placeholder="Enter youtube url here!" value="<?php if (isset($_POST['submit'])) { echo $_POST['video_url']; } ?>" name="video_url">
 		  	<span class="mx-1"></span>
-		  	<button type="submit" name="submit" class="btn btn-outline-success shadow">Unduh</button>
+		  	<button type="submit" name="submit" class="btn btn-outline-success shadow">Download</button>
 		</div>
 	</form>
 
@@ -58,8 +58,8 @@
 		if ($isVideoIdValid == '0') {
 	?>
 			<div class="text-center my-5">
-				<h3>URL salah</h3>
-				<p>Periksa tautan yang Anda masukkan</p>
+				<h3>Wrong URL</h3>
+				<p>Check the link you entered</p>
 			</div>
 	<?php
 		} elseif ($isvalid == 'OK') {
@@ -72,12 +72,12 @@
 			      			if ($playableInEmbed == 'true') {
 		  				?>
 				  				<input type="text" class="form-control mb-2" value="<?= $video_embed ?>" id="video_embed" readonly>
-					      		<button type="button" class="btn btn-outline-primary w-100" id="copyTextBtn">Salin link video embed</button>
+					      		<button type="button" class="btn btn-outline-primary w-100" id="copyTextBtn">Copy the embed video link</button>
 		  				<?php	
 		  					} else {
 		  				?>
 				  				<div class="text-center my-3">
-				     				<p>Embed video tidak di izinkan pada video ini</p>
+				     				<p>Embed videos are not allowed in this video</p>
 				     			</div>
 		  				<?php
 		  					}
@@ -89,8 +89,8 @@
 		  						if(@$adaptiveFormats[0]->url == '') {
 		  				?>
 					  				<div class="text-center my-5">
-						    			<h3>Tidak didukung</h3>
-					     				<p>Video ini saat ini tidak didukung</p>
+						    			<h3>Not supported</h3>
+					     				<p>This video is not currently supported</p>
 					     			</div>
 		  				<?php
 		  						} else {
@@ -108,14 +108,14 @@
 										  		} else {
 										  	?>	
 										  	<li class="list-group-item d-flex justify-content-between align-items-center">
-										    Video Durasi
-										    	<span class="badge bg-primary rounded-pill"><?php echo "$jam : $menit : $detik"; ?></span>
+										    Video Duration
+										    	<span class="badge bg-primary rounded-pill"><?php echo "$hour : $minute : $second"; ?></span>
 										  	</li>
 										  	<?php
 										  		}
 										  	?>
 										  	<li class="list-group-item d-flex justify-content-between align-items-center">
-										    Penonton
+										    Viewer
 										    	<span class="badge bg-primary rounded-pill"><?php echo $views; ?></span>
 										  	</li>
 										</ul>
@@ -135,8 +135,8 @@
 						if ($isLiveNow == 'true') {
 			?>
 							<div class="text-center my-5">
-								<h3>Untuk video live streaming tidak dapat unduh</h3>
-								<p>Harap coba lagi ketika live streaming selesai</p>
+								<h3>For live streaming video can't download</h3>
+								<p>Please try again when the live stream is over</p>
 							</div>
 			<?php
 							if ($playableInEmbed == 'true') {
@@ -151,9 +151,9 @@
 							<table class="table table-striped table-hover table-bordered text-center">
 								<thead>
 							    	<tr>
-								      	<th>Resolusi</th>
+								      	<th>Resolution</th>
 								      	<th>Format</th>
-								      	<th>Ukuran File</th>
+								      	<th>File Size</th>
 								      	<th>Download</th>
 							    	</tr>
 							  	</thead>
@@ -213,8 +213,8 @@
 		} else {
 	?>
 			<div class="text-center my-5">
-				<h3>Kami tidak dapat memperoleh informasi video</h3>
-			    <p>Anda dapat memeriksa tautan yang Anda masukkan</p>
+				<h3>We can't get video information</h3>
+			    <p>You can check the link you entered</p>
 			</div>
 	<?php
 		}
